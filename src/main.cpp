@@ -1,7 +1,9 @@
 #include <iostream>
 
 #include "Customer.h"
-
+#include <gtest/gtest.h>
+#include <gmock/gmock.h>
+/*
 int main() {
 
     Customer customer("Olivier");
@@ -12,4 +14,9 @@ int main() {
     std::cout << customer.statement() << std::endl;
 
     return 0;
+}
+*/
+int main(int argc, char **argv) {
+	testing::InitGoogleTest(&argc, argv);
+	return RUN_ALL_TESTS();
 }
