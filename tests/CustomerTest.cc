@@ -4,6 +4,8 @@
 #include <string.h>
 
 #include "../src/Customer.h"
+#include "src/Rental/MoviePriceCode/NewRelease.h"
+#include "src/Rental/MoviePriceCode/Children.h"
 
 using namespace std;
 /*
@@ -32,9 +34,9 @@ TEST(statementIntegration, testReturnForOneRentals) {
 
 TEST(statementIntegration, testReturnForManyRentalsWithDifferentPriceCode) {
 	Customer c;
-	c.addRental(Rental(Movie("Shrek",Movie::CHILDRENS),8));
+	c.addRental(Rental(Movie("Shrek", new Children()),8));
 	c.addRental(Rental(Movie("Inception"),12));
-	c.addRental(Rental(Movie("Avatar2",Movie::NEW_RELEASE),20));
+	c.addRental(Rental(Movie("Avatar2", new NewRelease()),20));
 	string statement = c.statement();
 
 	ASSERT_EQ(statement, "Rental Record for \n\tShrek\t9\n\tInception\t17\n\tAvatar2\t60\nAmount owed is 86\nYou earned 4 frequent renter points");
