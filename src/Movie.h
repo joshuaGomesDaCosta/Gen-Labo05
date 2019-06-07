@@ -26,13 +26,10 @@ Movie( const std::string& title, int priceCode )
         , _priceCode( priceCode )
 {}
 
-inline int Movie::
-getPriceCode() const { return _priceCode; }
+inline int Movie::getPriceCode() const { return _priceCode; }
 
-inline void Movie::
-setPriceCode( int arg ) { _priceCode = arg; }
+inline void Movie::setPriceCode( int arg ) { _priceCode = arg; }
 
-inline std::string Movie::
-getTitle() const { return _title; }
+inline std::string Movie::getTitle() const { return _title; }
 
 #endif // MOVIE_H

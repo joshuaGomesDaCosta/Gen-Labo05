@@ -17,6 +17,24 @@ protected:
 };
 */
 
+TEST(determineAmountsIntegration, testReturnForRentalWithRegularMovie) {
+	Customer c;
+	Rental rental = Rental(Movie("Avatar",Movie::REGULAR),10);
+	ASSERT_EQ(c.determineAmounts(rental), 14);
+}
+
+TEST(determineAmountsIntegration, testReturnForRentalWithReleaseMovie) {
+	Customer c;
+	Rental rental = Rental(Movie("Avatar",Movie::NEW_RELEASE),10);
+	ASSERT_EQ(c.determineAmounts(rental), 30);
+}
+
+TEST(determineAmountsIntegration, testReturnForRentalWithChildrensMovie) {
+	Customer c;
+	Rental rental = Rental(Movie("Avatar",Movie::CHILDRENS),10);
+	ASSERT_EQ(c.determineAmounts(rental), 12);
+}
+
 TEST(statementIntegration, testReturnForEmptyRentals) {
 	Customer c;
 	string statement = c.statement();

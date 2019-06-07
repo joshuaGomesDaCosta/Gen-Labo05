@@ -12,6 +12,7 @@ public:
 
     void addRental( const Rental& arg );
     std::string getName() const;
+    double determineAmounts(Rental rental);
     std::string statement();
 
 private:
