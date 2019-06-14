@@ -11,7 +11,6 @@ using namespace std;
 
 string Customer::statement()
 {
-    double totalAmount = 0;
     int frequentRenterPoints = 0;
     vector< Rental >::iterator iter = _rentals.begin();
     vector< Rental >::iterator iter_end = _rentals.end();
@@ -20,7 +19,6 @@ string Customer::statement()
     result << "Rental Record for " << getName() << "\n";
     for ( ; iter != iter_end; ++iter ) {
         Rental each = *iter;
-        double thisAmount = each.determineAmount();
 
         // add frequent renter points
         frequentRenterPoints++;
@@ -31,11 +29,23 @@ string Customer::statement()
 
         // show figures for this rental
         result << "\t" + each.streamPrint();
-        totalAmount += thisAmount;
     }
     // add footer lines
-    result << "Amount owed is " << totalAmount << "\n";
+    result << "Amount owed is " << getTotalAmount() << "\n";
     result << "You earned " << frequentRenterPoints
            << " frequent renter points";
     return result.str();
+}
+
+double Customer::getTotalAmount() const {
+    double totalAmount = 0;
+
+    auto iter = _rentals.begin();
+    auto iter_end = _rentals.end();
+
+    for( ; iter != iter_end; ++iter ){
+        totalAmount += iter->determineAmount();
+    }
+
+    return totalAmount;
 }

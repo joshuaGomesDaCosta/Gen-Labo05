@@ -41,3 +41,27 @@ TEST(statementIntegration, testReturnForManyRentalsWithDifferentPriceCode) {
 
 	ASSERT_EQ(statement, "Rental Record for \n\tShrek\t9\n\tInception\t17\n\tAvatar2\t60\nAmount owed is 86\nYou earned 4 frequent renter points");
 }
+
+TEST(getTotalAmount, testReturnTheRightTotalAmount) {
+    Customer c;
+    c.addRental(Rental(Movie("Shrek", std::shared_ptr<MoviePriceCode>(new Children())),8));
+    c.addRental(Rental(Movie("Inception", std::shared_ptr<MoviePriceCode>(new Regular())),12));
+    c.addRental(Rental(Movie("Avatar2", std::shared_ptr<MoviePriceCode>(new NewRelease())),20));
+    double totalAmount = c.getTotalAmount();
+
+    ASSERT_EQ(totalAmount, 86);
+}
+
+TEST(getTotalAmount, testReturnTheRightTotalAmountWithEmptyRental) {
+    Customer c;
+    double totalAmount = c.getTotalAmount();
+
+    ASSERT_EQ(totalAmount, 0.0);
+}
+TEST(getTotalAmount, testReturnTheRightTotalAmountWithOneRental) {
+    Customer c;
+    c.addRental(Rental(Movie("Shrek", std::shared_ptr<MoviePriceCode>(new Children())),8));
+    double totalAmount = c.getTotalAmount();
+
+    ASSERT_EQ(totalAmount, 9);
+}
