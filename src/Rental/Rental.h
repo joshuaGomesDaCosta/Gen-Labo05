@@ -7,41 +7,41 @@
 
 class Rental {
 public:
-    Rental( const Movie& movie, int daysRented );
+    Rental( std::shared_ptr<Movie> movie, int daysRented );
 
     int getDaysRented() const;
-    const Movie& getMovie() const;
+    const std::shared_ptr<Movie> getMovie() const;
     double determineAmount() const;
     std::string streamPrint() const;
     int getFrequentRenterPoints() const;
 
 private:
-    Movie _movie;
+    std::shared_ptr<Movie> _movie;
     int _daysRented;
 };
 
-inline Rental::Rental( const Movie& movie, int daysRented )
-        : _movie( movie )
+inline Rental::Rental( std::shared_ptr<Movie> movie, int daysRented )
+        : _movie( std::move(movie))
         , _daysRented( daysRented ) {}
 
 inline int Rental::getDaysRented() const { return _daysRented; }
 
-inline const Movie& Rental::getMovie() const { return _movie; }
+inline const std::shared_ptr<Movie> Rental::getMovie() const { return _movie; }
 
 inline double Rental::determineAmount() const {
-    return _movie.getPriceCode()->generateAmount(_daysRented);
+    return _movie->getPriceCode()->generateAmount(_daysRented);
 }
 
 inline std::string Rental::streamPrint() const {
 	std::stringstream ss("");
-	ss << _movie.getTitle() << "\t" << determineAmount() << "\n";
+	ss << _movie->getTitle() << "\t" << determineAmount() << "\n";
 	return ss.str();
 }
 
 inline int Rental::getFrequentRenterPoints() const {
     int frequentRenterPoints = 1;
 
-    frequentRenterPoints += _movie.getPriceCode().get()->getFrequentBonus(_daysRented);
+    frequentRenterPoints += _movie->getPriceCode()->getFrequentBonus(_daysRented);
 
     return frequentRenterPoints;
 }
