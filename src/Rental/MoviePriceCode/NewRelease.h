@@ -13,6 +13,7 @@ private:
 public:
     NewRelease();
     virtual double generateAmount(int rentalDays);
+    int getFrequentBonus(int rentalDays);
 };
 
 inline NewRelease::NewRelease()
@@ -21,6 +22,12 @@ inline NewRelease::NewRelease()
 
 inline double NewRelease::generateAmount(int rentalDays) {
     return rentalDays * MULTIPLY;
+}
+
+inline int NewRelease::getFrequentBonus(int rentalDays) {
+    if(rentalDays > 1)
+        return 1;
+    return 0;
 }
 
 #endif //GEN_LABO05_NEWRELEASE_H
