@@ -9,16 +9,16 @@
 #include "src/Rental/MoviePriceCode/Children.h"
 
 TEST(determineAmountsIntegration, testReturnForRentalWithRegularMovie) {
-	Rental rental = Rental(Movie("Avatar", new Regular()),10);
+	Rental rental = Rental(Movie("Avatar", std::shared_ptr<MoviePriceCode>(new Regular())),10);
 	ASSERT_EQ(rental.determineAmount(), 14);
 }
 
 TEST(determineAmountsIntegration, testReturnForRentalWithReleaseMovie) {
-	Rental rental = Rental(Movie("Avatar", new NewRelease()),10);
+	Rental rental = Rental(Movie("Avatar", std::shared_ptr<MoviePriceCode>(new NewRelease())),10);
 	ASSERT_EQ(rental.determineAmount(), 30);
 }
 
 TEST(determineAmountsIntegration, testReturnForRentalWithChildrensMovie) {
-	Rental rental = Rental(Movie("Avatar", new Children()),10);
+	Rental rental = Rental(Movie("Avatar",std::shared_ptr<MoviePriceCode>(new Children())),10);
 	ASSERT_EQ(rental.determineAmount(), 12);
 }

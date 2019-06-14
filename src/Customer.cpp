@@ -26,7 +26,7 @@ string Customer::statement()
         frequentRenterPoints++;
 
         // add bonus for a two day new release rental
-        if (dynamic_cast<NewRelease*>(each.getMovie().getPriceCode()) && each.getDaysRented() > 1 )
+        if (dynamic_cast<NewRelease*>(each.getMovie().getPriceCode().get()) && each.getDaysRented() > 1 )
             frequentRenterPoints++;
 
         // show figures for this rental
