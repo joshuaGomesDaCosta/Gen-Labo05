@@ -9,6 +9,10 @@
 #include "MoviePriceCode.h"
 
 class Children : public MoviePriceCode{
+private:
+    const double AMOUNT = 1.5;
+    const int FREE_DAYS = 3;
+    const double MULTIPLY = 1.5;
 public:
     Children();
     virtual double generateAmount(int rentalDays);
@@ -19,9 +23,9 @@ inline Children::Children()
 {}
 
 inline double Children::generateAmount(int rentalDays) {
-    double amount = 1.5;
-    if(rentalDays > 3)
-        amount += (rentalDays-3)*1.5;
+    double amount = AMOUNT;
+    if(rentalDays > FREE_DAYS)
+        amount += (rentalDays-FREE_DAYS)*MULTIPLY;
     return amount;
 }
 

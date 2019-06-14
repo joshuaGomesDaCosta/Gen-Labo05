@@ -8,6 +8,8 @@
 #include "MoviePriceCode.h"
 
 class NewRelease : public MoviePriceCode{
+private:
+    const double MULTIPLY = 3;
 public:
     NewRelease();
     virtual double generateAmount(int rentalDays);
@@ -17,10 +19,8 @@ inline NewRelease::NewRelease()
 :MoviePriceCode()
 {}
 
-
-
 inline double NewRelease::generateAmount(int rentalDays) {
-    return rentalDays*3;
+    return rentalDays * MULTIPLY;
 }
 
 #endif //GEN_LABO05_NEWRELEASE_H
