@@ -10,6 +10,8 @@
 class NewRelease : public MoviePriceCode{
 private:
     const double MULTIPLY = 3;
+    const int DAYS_BONUS_FREQUENT = 1;
+    const int BONUS = 1;
 public:
     NewRelease();
     virtual double generateAmount(int rentalDays);
@@ -25,8 +27,8 @@ inline double NewRelease::generateAmount(int rentalDays) {
 }
 
 inline int NewRelease::getFrequentBonus(int rentalDays) {
-    if(rentalDays > 1)
-        return 1;
+    if(rentalDays > DAYS_BONUS_FREQUENT)
+        return BONUS;
     return 0;
 }
 
