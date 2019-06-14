@@ -58,10 +58,28 @@ TEST(getTotalAmount, testReturnTheRightTotalAmountWithEmptyRental) {
 
     ASSERT_EQ(totalAmount, 0.0);
 }
+
 TEST(getTotalAmount, testReturnTheRightTotalAmountWithOneRental) {
     Customer c;
     c.addRental(Rental(Movie("Shrek", std::shared_ptr<MoviePriceCode>(new Children())),8));
     double totalAmount = c.getTotalAmount();
 
     ASSERT_EQ(totalAmount, 9);
+}
+
+TEST(getTotalRenterPoint, testReturnTheRightTotalRenterPoint) {
+    Customer c;
+    c.addRental(Rental(Movie("Shrek", std::shared_ptr<MoviePriceCode>(new Children())),8));
+    c.addRental(Rental(Movie("Inception", std::shared_ptr<MoviePriceCode>(new Regular())),12));
+    c.addRental(Rental(Movie("Avatar2", std::shared_ptr<MoviePriceCode>(new NewRelease())),20));
+    int totalRenterPoint = c.getTotalRenterPoint();
+
+    ASSERT_EQ(totalRenterPoint, 4);
+}
+
+TEST(getTotalRenterPoint, testReturnTheRightTotalRenterPointEmpty) {
+    Customer c;
+    int totalRenterPoint = c.getTotalRenterPoint();
+
+    ASSERT_EQ(totalRenterPoint, 0);
 }

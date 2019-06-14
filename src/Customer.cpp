@@ -19,14 +19,12 @@ string Customer::statement()
     for ( ; iter != iter_end; ++iter ) {
         Rental each = *iter;
 
-        frequentRenterPoints += each.getFrequentRenterPoints();
-
         // show figures for this rental
         result << "\t" + each.streamPrint();
     }
     // add footer lines
     result << "Amount owed is " << getTotalAmount() << "\n";
-    result << "You earned " << frequentRenterPoints
+    result << "You earned " << getTotalRenterPoint()
            << " frequent renter points";
     return result.str();
 }
@@ -42,4 +40,17 @@ double Customer::getTotalAmount() const {
     }
 
     return totalAmount;
+}
+
+int Customer::getTotalRenterPoint() const {
+    int frequentRenterPoints = 0;
+
+    auto iter = _rentals.begin();
+    auto iter_end = _rentals.end();
+
+    for( ; iter != iter_end; ++iter ){
+        frequentRenterPoints += iter->getFrequentRenterPoints();
+    }
+
+    return frequentRenterPoints;
 }

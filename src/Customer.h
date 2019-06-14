@@ -15,6 +15,7 @@ public:
     std::string statement();
 
     double getTotalAmount() const;
+    int getTotalRenterPoint() const;
 
 private:
     std::string _name;
