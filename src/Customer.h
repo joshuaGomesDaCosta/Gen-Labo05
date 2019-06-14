@@ -14,8 +14,10 @@ public:
     std::string getName() const;
     std::string statement();
 
+
     double getTotalAmount() const;
     int getTotalRenterPoint() const;
+    std::string getAllRentalPrint() const;
 
 private:
     std::string _name;

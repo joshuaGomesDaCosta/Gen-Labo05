@@ -10,18 +10,10 @@ using namespace std;
 
 string Customer::statement()
 {
-    int frequentRenterPoints = 0;
-    vector< Rental >::iterator iter = _rentals.begin();
-    vector< Rental >::iterator iter_end = _rentals.end();
     ostringstream result;
 
     result << "Rental Record for " << getName() << "\n";
-    for ( ; iter != iter_end; ++iter ) {
-        Rental each = *iter;
-
-        // show figures for this rental
-        result << "\t" + each.streamPrint();
-    }
+    result << getAllRentalPrint();
     // add footer lines
     result << "Amount owed is " << getTotalAmount() << "\n";
     result << "You earned " << getTotalRenterPoint()
@@ -53,4 +45,17 @@ int Customer::getTotalRenterPoint() const {
     }
 
     return frequentRenterPoints;
+}
+
+std::string Customer::getAllRentalPrint() const {
+    string allRentalPrint = "";
+
+    auto iter = _rentals.begin();
+    auto iter_end = _rentals.end();
+
+    for( ; iter != iter_end; ++iter ){
+        allRentalPrint += "\t" + iter->streamPrint();
+    }
+
+    return allRentalPrint;
 }

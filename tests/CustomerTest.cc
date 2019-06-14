@@ -83,3 +83,18 @@ TEST(getTotalRenterPoint, testReturnTheRightTotalRenterPointEmpty) {
 
     ASSERT_EQ(totalRenterPoint, 0);
 }
+
+TEST(getAllRentalPrint, testReturnTheRightGetAllRentalPrint) {
+    Customer c;
+    c.addRental(Rental(Movie("Shrek", std::shared_ptr<MoviePriceCode>(new Children())),8));
+    c.addRental(Rental(Movie("Inception", std::shared_ptr<MoviePriceCode>(new Regular())),12));
+    c.addRental(Rental(Movie("Avatar2", std::shared_ptr<MoviePriceCode>(new NewRelease())),20));
+    string allRentalPrint = c.getAllRentalPrint();
+    ASSERT_EQ(allRentalPrint, "\tShrek\t9\n\tInception\t17\n\tAvatar2\t60\n");
+}
+
+TEST(getAllRentalPrint, testReturnTheRightGetAllRentalPrintEmpty) {
+    Customer c;
+    string allRentalPrint = c.getAllRentalPrint();
+    ASSERT_EQ(allRentalPrint, "");
+}
