@@ -31,3 +31,18 @@ TEST( generateAmountUnit, testReturnForChildrenWith0To5Days) {
 		ASSERT_EQ(Children().generateAmount(i), amount);
 	}
 }
+
+TEST(getFrequentBonus, testReturnFrequentPointBonusNewRelease) {
+    ASSERT_EQ(NewRelease().getFrequentBonus(1), 0);
+    ASSERT_EQ(NewRelease().getFrequentBonus(3), 1);
+}
+
+TEST(getFrequentBonus, testReturnFrequentPointBonusChildren) {
+    ASSERT_EQ(Children().getFrequentBonus(1), 0);
+    ASSERT_EQ(Children().getFrequentBonus(3), 0);
+}
+
+TEST(getFrequentBonus, testReturnFrequentPointBonusForRegular) {
+    ASSERT_EQ(Regular().getFrequentBonus(1), 0);
+    ASSERT_EQ(Regular().getFrequentBonus(3), 0);
+}
