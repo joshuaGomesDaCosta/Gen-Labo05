@@ -22,3 +22,18 @@ TEST(determineAmountsIntegration, testReturnForRentalWithChildrensMovie) {
 	Rental rental = Rental(Movie("Avatar",std::shared_ptr<MoviePriceCode>(new Children())),10);
 	ASSERT_EQ(rental.determineAmount(), 12);
 }
+
+TEST(getFrequentRenterPoints, testReturnTheNumberOfFrequentRenterPointsWithChildren) {
+    Rental rental = Rental(Movie("Avatar",std::shared_ptr<MoviePriceCode>(new Children())),10);
+    ASSERT_EQ(rental.getFrequentRenterPoints(), 1);
+}
+
+TEST(getFrequentRenterPoints, testReturnTheNumberOfFrequentRenterPointsWithNewReleaseWithMultipleDays) {
+    Rental rental = Rental(Movie("Avatar",std::shared_ptr<MoviePriceCode>(new NewRelease())),2);
+    ASSERT_EQ(rental.getFrequentRenterPoints(), 2);
+}
+
+TEST(getFrequentRenterPoints, testReturnTheNumberOfFrequentRenterPointsWithNewReleaseWithOneDay) {
+    Rental rental = Rental(Movie("Avatar",std::shared_ptr<MoviePriceCode>(new NewRelease())),1);
+    ASSERT_EQ(rental.getFrequentRenterPoints(), 1);
+}

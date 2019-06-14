@@ -1,7 +1,6 @@
 // Customer.cpp
 #include <sstream>
 #include <vector>
-#include <src/Rental/MoviePriceCode/NewRelease.h>
 #include "Customer.h"
 
 using std::ostringstream;
@@ -20,12 +19,7 @@ string Customer::statement()
     for ( ; iter != iter_end; ++iter ) {
         Rental each = *iter;
 
-        // add frequent renter points
-        frequentRenterPoints++;
-
-        // add bonus for a two day new release rental
-        if (dynamic_cast<NewRelease*>(each.getMovie().getPriceCode().get()) && each.getDaysRented() > 1 )
-            frequentRenterPoints++;
+        frequentRenterPoints += each.getFrequentRenterPoints();
 
         // show figures for this rental
         result << "\t" + each.streamPrint();

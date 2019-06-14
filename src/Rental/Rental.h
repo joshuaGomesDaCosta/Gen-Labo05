@@ -2,6 +2,7 @@
 #ifndef RENTAL_H
 #define RENTAL_H
 #include "Movie.h"
+#include <src/Rental/MoviePriceCode/NewRelease.h>
 #include <sstream>
 
 class Rental {
@@ -12,6 +13,7 @@ public:
     const Movie& getMovie() const;
     double determineAmount() const;
     std::string streamPrint() const;
+    int getFrequentRenterPoints() const;
 
 private:
     Movie _movie;
@@ -35,4 +37,14 @@ inline std::string Rental::streamPrint() const {
 	ss << _movie.getTitle() << "\t" << determineAmount() << "\n";
 	return ss.str();
 }
+
+inline int Rental::getFrequentRenterPoints() const {
+    int frequentRenterPoints = 1;
+
+    if (dynamic_cast<NewRelease*>(_movie.getPriceCode().get()) && _daysRented > 1 )
+        frequentRenterPoints++;
+
+    return frequentRenterPoints;
+}
+
 #endif // RENTAL_H
