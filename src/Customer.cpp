@@ -28,7 +28,7 @@ double Customer::getTotalAmount() const {
     auto iter_end = _rentals.end();
 
     for( ; iter != iter_end; ++iter ){
-        totalAmount += iter->determineAmount();
+        totalAmount += (*iter)->determineAmount();
     }
 
     return totalAmount;
@@ -41,7 +41,7 @@ int Customer::getTotalRenterPoint() const {
     auto iter_end = _rentals.end();
 
     for( ; iter != iter_end; ++iter ){
-        frequentRenterPoints += iter->getFrequentRenterPoints();
+        frequentRenterPoints += (*iter)->getFrequentRenterPoints();
     }
 
     return frequentRenterPoints;
@@ -54,7 +54,7 @@ std::string Customer::getAllRentalPrint() const {
     auto iter_end = _rentals.end();
 
     for( ; iter != iter_end; ++iter ){
-        allRentalPrint += "\t" + iter->streamPrint();
+        allRentalPrint += "\t" + (*iter)->streamPrint();
     }
 
     return allRentalPrint;
