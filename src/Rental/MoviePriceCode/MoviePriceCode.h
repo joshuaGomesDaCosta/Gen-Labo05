@@ -5,7 +5,6 @@
 #ifndef GEN_LABO05_MOVIEPRICECODE_H
 #define GEN_LABO05_MOVIEPRICECODE_H
 
-
 class MoviePriceCode {
 protected:
     int freeDays;

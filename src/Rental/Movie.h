@@ -3,8 +3,8 @@
 #define MOVIE_H
 
 #include <string>
-#include "src/Rental/MoviePriceCode/MoviePriceCode.h"
-#include "src/Rental/MoviePriceCode/Regular.h"
+#include "MoviePriceCode/MoviePriceCode.h"
+#include "MoviePriceCode/Regular.h"
 
 class Movie {
 public:

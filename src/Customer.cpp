@@ -17,8 +17,6 @@ string Customer::statement()
     vector< Rental >::iterator iter_end = _rentals.end();
     ostringstream result;
 
-
-
     result << "Rental Record for " << getName() << "\n";
     for ( ; iter != iter_end; ++iter ) {
         Rental each = *iter;
@@ -32,8 +30,7 @@ string Customer::statement()
             frequentRenterPoints++;
 
         // show figures for this rental
-        result << "\t" << each.getMovie().getTitle() << "\t"
-               << thisAmount << "\n";
+        result << "\t" + each.streamPrint();
         totalAmount += thisAmount;
     }
     // add footer lines
