@@ -10,8 +10,7 @@ add_executable(Gen_Labo05
 		src/Customer.cpp
 		src/Customer.h
 		src/main.cpp
-		src/Rental/Movie.cpp
-		src/Rental/Movie.h
+        src/Rental/Movie.h
 		src/Rental/Rental.h
 		tests/CustomerTest.cc
 		tests/RentalTest.cc
