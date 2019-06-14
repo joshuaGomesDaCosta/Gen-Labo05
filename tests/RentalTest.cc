@@ -2,6 +2,8 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 #include <string.h>
+#include <src/Rental/MovieImpl.h>
+#include <src/Rental/RentalImpl.h>
 
 #include "../src/Rental/Rental.h"
 #include "src/Rental/MoviePriceCode/NewRelease.h"
@@ -9,31 +11,31 @@
 #include "src/Rental/MoviePriceCode/Children.h"
 
 TEST(determineAmountsIntegration, testReturnForRentalWithRegularMovie) {
-	Rental rental = Rental(std::shared_ptr<Movie>(new Movie("Avatar", std::shared_ptr<MoviePriceCode>(new Regular()))),10);
+	RentalImpl rental = RentalImpl(std::shared_ptr<Movie>(new MovieImpl("Avatar", std::shared_ptr<MoviePriceCode>(new Regular()))),10);
 	ASSERT_EQ(rental.determineAmount(), 14);
 }
 
 TEST(determineAmountsIntegration, testReturnForRentalWithReleaseMovie) {
-	Rental rental = Rental(std::shared_ptr<Movie>(new Movie("Avatar", std::shared_ptr<MoviePriceCode>(new NewRelease()))),10);
+	RentalImpl rental = RentalImpl(std::shared_ptr<Movie>(new MovieImpl("Avatar", std::shared_ptr<MoviePriceCode>(new NewRelease()))),10);
 	ASSERT_EQ(rental.determineAmount(), 30);
 }
 
 TEST(determineAmountsIntegration, testReturnForRentalWithChildrensMovie) {
-	Rental rental = Rental(std::shared_ptr<Movie>(new Movie("Avatar",std::shared_ptr<MoviePriceCode>(new Children()))),10);
+	RentalImpl rental = RentalImpl(std::shared_ptr<Movie>(new MovieImpl("Avatar",std::shared_ptr<MoviePriceCode>(new Children()))),10);
 	ASSERT_EQ(rental.determineAmount(), 12);
 }
 
 TEST(getFrequentRenterPoints, testReturnTheNumberOfFrequentRenterPointsWithChildren) {
-    Rental rental = Rental(std::shared_ptr<Movie>(new Movie("Avatar",std::shared_ptr<MoviePriceCode>(new Children()))),10);
+    RentalImpl rental = RentalImpl(std::shared_ptr<Movie>(new MovieImpl("Avatar",std::shared_ptr<MoviePriceCode>(new Children()))),10);
     ASSERT_EQ(rental.getFrequentRenterPoints(), 1);
 }
 
 TEST(getFrequentRenterPoints, testReturnTheNumberOfFrequentRenterPointsWithNewReleaseWithMultipleDays) {
-    Rental rental = Rental(std::shared_ptr<Movie>(new Movie("Avatar",std::shared_ptr<MoviePriceCode>(new NewRelease()))),2);
+    RentalImpl rental = RentalImpl(std::shared_ptr<Movie>(new MovieImpl("Avatar",std::shared_ptr<MoviePriceCode>(new NewRelease()))),2);
     ASSERT_EQ(rental.getFrequentRenterPoints(), 2);
 }
 
 TEST(getFrequentRenterPoints, testReturnTheNumberOfFrequentRenterPointsWithNewReleaseWithOneDay) {
-    Rental rental = Rental(std::shared_ptr<Movie>(new Movie("Avatar",std::shared_ptr<MoviePriceCode>(new NewRelease()))),1);
+    RentalImpl rental = RentalImpl(std::shared_ptr<Movie>(new MovieImpl("Avatar",std::shared_ptr<MoviePriceCode>(new NewRelease()))),1);
     ASSERT_EQ(rental.getFrequentRenterPoints(), 1);
 }

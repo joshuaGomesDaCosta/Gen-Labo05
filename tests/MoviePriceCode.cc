@@ -1,11 +1,9 @@
-
 #include <gtest/gtest.h>
-#include <gmock/gmock.h>
-
 #include "src/Rental/MoviePriceCode/MoviePriceCode.h"
 #include "src/Rental/MoviePriceCode/Children.h"
 #include "src/Rental/MoviePriceCode/Regular.h"
 #include "src/Rental/MoviePriceCode/NewRelease.h"
+
 
 TEST( generateAmountUnit, testReturnForRegularWith0To5Days) {
 	for(int i = 0; i < 5; i++) {
