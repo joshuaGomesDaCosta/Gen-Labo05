@@ -6,17 +6,12 @@
 #define GEN_LABO05_MOVIEPRICECODE_H
 
 class MoviePriceCode {
-protected:
-    int freeDays;
-    double price;
-    double multiply;
 public:
-    MoviePriceCode(int freeDays, double price, double multiply);
+    MoviePriceCode();
     virtual double generateAmount(int rentalDays) = 0;
 };
 
-inline MoviePriceCode::MoviePriceCode(int freeDays, double price, double multiply)
-:freeDays(freeDays), price(price), multiply(multiply)
+inline MoviePriceCode::MoviePriceCode()
 {}
 
 #endif //GEN_LABO05_MOVIEPRICECODE_H

@@ -15,13 +15,13 @@ public:
 };
 
 inline Children::Children()
-:MoviePriceCode(3, 1.5, 1.5)
+:MoviePriceCode()
 {}
 
 inline double Children::generateAmount(int rentalDays) {
-    double amount = price;
-    if(rentalDays - freeDays > 0)
-        amount += (rentalDays-freeDays)*multiply;
+    double amount = 1.5;
+    if(rentalDays > 3)
+        amount += (rentalDays-3)*1.5;
     return amount;
 }
 

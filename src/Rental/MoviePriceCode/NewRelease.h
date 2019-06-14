@@ -14,16 +14,13 @@ public:
 };
 
 inline NewRelease::NewRelease()
-:MoviePriceCode(0, 0, 3)
+:MoviePriceCode()
 {}
 
 
 
 inline double NewRelease::generateAmount(int rentalDays) {
-    double amount = price;
-    if(rentalDays - freeDays > 0)
-        amount += (rentalDays-freeDays)*multiply;
-    return amount;
+    return rentalDays*3;
 }
 
 #endif //GEN_LABO05_NEWRELEASE_H

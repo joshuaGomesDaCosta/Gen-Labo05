@@ -15,6 +15,7 @@ add_executable(Gen_Labo05
 		src/Rental/Rental.h
 		tests/CustomerTest.cc
 		tests/RentalTest.cc
+		tests/MoviePriceCode.cc
 		src/Rental/MoviePriceCode/MoviePriceCode.h src/Rental/MoviePriceCode/Regular.h src/Rental/MoviePriceCode/Children.h src/Rental/MoviePriceCode/NewRelease.h)
 
 add_subdirectory(lib/googletest-release-1.8.1)

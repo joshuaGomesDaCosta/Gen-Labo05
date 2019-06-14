@@ -14,13 +14,13 @@ public:
 };
 
 inline Regular::Regular()
-:MoviePriceCode(2, 2, 1.5)
+:MoviePriceCode()
 {}
 
 inline double Regular::generateAmount(int rentalDays) {
-    double amount = price;
-    if(rentalDays - freeDays > 0)
-        amount += (rentalDays-freeDays)*multiply;
+    double amount = 2;
+    if(rentalDays > 2)
+        amount += (rentalDays-2)*1.5;
     return amount;
 }
 
