@@ -1,3 +1,4 @@
+// RentalImpl.h
 #ifndef GEN_LABO05_RENTALIMPL_H
 #define GEN_LABO05_RENTALIMPL_H
 

@@ -1,7 +1,4 @@
-//
-// Created by scout407 on 07.06.2019.
-//
-
+// Regular.h
 #ifndef GEN_LABO05_REGULAR_H
 #define GEN_LABO05_REGULAR_H
 

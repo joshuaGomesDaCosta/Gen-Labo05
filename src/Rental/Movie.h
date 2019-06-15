@@ -4,7 +4,7 @@
 
 #include <string>
 #include <memory>
-#include "MoviePriceCode/MoviePriceCode.h"
+#include "src/Rental/MoviePriceCode/MoviePriceCode.h"
 
 class Movie {
 public:

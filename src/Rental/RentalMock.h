@@ -1,3 +1,4 @@
+// RentalMock.h
 #ifndef GEN_LABO05_RENTALMOCK_H
 #define GEN_LABO05_RENTALMOCK_H
 

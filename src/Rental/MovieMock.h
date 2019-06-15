@@ -1,3 +1,4 @@
+// MovieMock.h
 #ifndef GEN_LABO05_MOVIEMOCK_H
 #define GEN_LABO05_MOVIEMOCK_H
 

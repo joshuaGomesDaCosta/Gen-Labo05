@@ -1,7 +1,4 @@
-//
-// Created by scout407 on 07.06.2019.
-//
-
+// MoviePriceCode.h
 #ifndef GEN_LABO05_MOVIEPRICECODE_H
 #define GEN_LABO05_MOVIEPRICECODE_H
 

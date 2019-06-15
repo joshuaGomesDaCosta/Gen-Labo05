@@ -1,7 +1,4 @@
-//
-// Created by scout407 on 07.06.2019.
-//
-
+// NewRelease.h
 #ifndef GEN_LABO05_NEWRELEASE_H
 #define GEN_LABO05_NEWRELEASE_H
 
