@@ -5,22 +5,16 @@
 #include <src/Rental/MovieImpl.h>
 #include <src/Rental/RentalImpl.h>
 #include <src/Rental/MoviePriceCode/Regular.h>
+#include <src/Rental/MovieMock.h>
+#include <src/Rental/RentalMock.h>
 
 #include "../src/Customer.h"
 #include "src/Rental/MoviePriceCode/NewRelease.h"
 #include "src/Rental/MoviePriceCode/Children.h"
 
 using namespace std;
-/*
-class CustomerTest : public ::testing::Test {
-protected:
-	virtual void SetUp() {
-		Customer c;
-	}
- 
- virtual void TearDown() {}
-};
-*/
+using ::testing::Return;
+using ::testing::ReturnRef;
 
 TEST(statementIntegration, testReturnForEmptyRentals) {
 	Customer c;
@@ -47,9 +41,19 @@ TEST(statementIntegration, testReturnForManyRentalsWithDifferentPriceCode) {
 
 TEST(getTotalAmount, testReturnTheRightTotalAmount) {
     Customer c;
-    c.addRental(std::shared_ptr<Rental>(new RentalImpl(std::shared_ptr<Movie>(new MovieImpl("Shrek", std::shared_ptr<MoviePriceCode>(new Children()))),8)));
-    c.addRental(std::shared_ptr<Rental>(new RentalImpl(std::shared_ptr<Movie>(new MovieImpl("Inception", std::shared_ptr<MoviePriceCode>(new Regular()))),12)));
-    c.addRental(std::shared_ptr<Rental>(new RentalImpl(std::shared_ptr<Movie>(new MovieImpl("Avatar2", std::shared_ptr<MoviePriceCode>(new NewRelease()))),20)));
+
+    std::shared_ptr<RentalMock> rental1(new RentalMock());
+    EXPECT_CALL(*rental1, determineAmount()).WillRepeatedly(Return(9));
+
+    std::shared_ptr<RentalMock> rental2(new RentalMock());
+    EXPECT_CALL(*rental2, determineAmount()).WillRepeatedly(Return(17));
+
+    std::shared_ptr<RentalMock> rental3(new RentalMock());
+    EXPECT_CALL(*rental3, determineAmount()).WillRepeatedly(Return(60));
+
+    c.addRental(rental1);
+    c.addRental(rental2);
+    c.addRental(rental3);
     double totalAmount = c.getTotalAmount();
 
     ASSERT_EQ(totalAmount, 86);
@@ -64,7 +68,11 @@ TEST(getTotalAmount, testReturnTheRightTotalAmountWithEmptyRental) {
 
 TEST(getTotalAmount, testReturnTheRightTotalAmountWithOneRental) {
     Customer c;
-    c.addRental(std::shared_ptr<Rental>(new RentalImpl(std::shared_ptr<Movie>(new MovieImpl("Shrek", std::shared_ptr<MoviePriceCode>(new Children()))),8)));
+
+    std::shared_ptr<RentalMock> rental(new RentalMock());
+    EXPECT_CALL(*rental, determineAmount()).WillRepeatedly(Return(9));
+
+    c.addRental(rental);
     double totalAmount = c.getTotalAmount();
 
     ASSERT_EQ(totalAmount, 9);
@@ -72,9 +80,19 @@ TEST(getTotalAmount, testReturnTheRightTotalAmountWithOneRental) {
 
 TEST(getTotalRenterPoint, testReturnTheRightTotalRenterPoint) {
     Customer c;
-    c.addRental(std::shared_ptr<Rental>(new RentalImpl(std::shared_ptr<Movie>(new MovieImpl("Shrek", std::shared_ptr<MoviePriceCode>(new Children()))),8)));
-    c.addRental(std::shared_ptr<Rental>(new RentalImpl(std::shared_ptr<Movie>(new MovieImpl("Inception", std::shared_ptr<MoviePriceCode>(new Regular()))),12)));
-    c.addRental(std::shared_ptr<Rental>(new RentalImpl(std::shared_ptr<Movie>(new MovieImpl("Avatar2", std::shared_ptr<MoviePriceCode>(new NewRelease()))),20)));
+
+    std::shared_ptr<RentalMock> rental1(new RentalMock());
+    EXPECT_CALL(*rental1, getFrequentRenterPoints()).WillRepeatedly(Return(1));
+
+    std::shared_ptr<RentalMock> rental2(new RentalMock());
+    EXPECT_CALL(*rental2, getFrequentRenterPoints()).WillRepeatedly(Return(1));
+
+    std::shared_ptr<RentalMock> rental3(new RentalMock());
+    EXPECT_CALL(*rental3, getFrequentRenterPoints()).WillRepeatedly(Return(2));
+
+    c.addRental(rental1);
+    c.addRental(rental2);
+    c.addRental(rental3);
     int totalRenterPoint = c.getTotalRenterPoint();
 
     ASSERT_EQ(totalRenterPoint, 4);
@@ -89,9 +107,19 @@ TEST(getTotalRenterPoint, testReturnTheRightTotalRenterPointEmpty) {
 
 TEST(getAllRentalPrint, testReturnTheRightGetAllRentalPrint) {
     Customer c;
-    c.addRental(std::shared_ptr<Rental>(new RentalImpl(std::shared_ptr<Movie>(new MovieImpl("Shrek", std::shared_ptr<MoviePriceCode>(new Children()))),8)));
-    c.addRental(std::shared_ptr<Rental>(new RentalImpl(std::shared_ptr<Movie>(new MovieImpl("Inception", std::shared_ptr<MoviePriceCode>(new Regular()))),12)));
-    c.addRental(std::shared_ptr<Rental>(new RentalImpl(std::shared_ptr<Movie>(new MovieImpl("Avatar2", std::shared_ptr<MoviePriceCode>(new NewRelease()))),20)));
+
+    std::shared_ptr<RentalMock> rental1(new RentalMock());
+    EXPECT_CALL(*rental1, streamPrint()).WillRepeatedly(Return("Shrek\t9\n"));
+
+    std::shared_ptr<RentalMock> rental2(new RentalMock());
+    EXPECT_CALL(*rental2, streamPrint()).WillRepeatedly(Return("Inception\t17\n"));
+
+    std::shared_ptr<RentalMock> rental3(new RentalMock());
+    EXPECT_CALL(*rental3, streamPrint()).WillRepeatedly(Return("Avatar2\t60\n"));
+
+    c.addRental(rental1);
+    c.addRental(rental2);
+    c.addRental(rental3);
     string allRentalPrint = c.getAllRentalPrint();
     ASSERT_EQ(allRentalPrint, "\tShrek\t9\n\tInception\t17\n\tAvatar2\t60\n");
 }
